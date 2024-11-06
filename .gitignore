@@ -1,3 +1,12 @@
+# manual ignores
+
+dataAndLogs
+
+
+
+
+# from template
+
 **/__pycache__/
 **tar.gz**
 

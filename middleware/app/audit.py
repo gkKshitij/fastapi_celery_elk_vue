@@ -1,24 +1,9 @@
-from fastapi import Depends, FastAPI
-from sqlmodel import select
-from sqlmodel.ext.asyncio.session import AsyncSession
-
-from app.db import get_session, init_db
-from app.models import Song, SongCreate, Item, Book
-##
-import json
-from pydantic import BaseModel
-from fastapi import FastAPI
-
-from app.worker import celery_app
-##
-from fastapi import FastAPI, HTTPException, Depends
 from fastapi import Response
 from fastapi.requests import Request
-from pydantic import BaseModel, Field
 from app import models
-from app.database import engine, session_local
-from sqlalchemy.orm import Session
+
 import app
+from app.db import session_local
 
 # Dependency
 def get_db(request: Request):

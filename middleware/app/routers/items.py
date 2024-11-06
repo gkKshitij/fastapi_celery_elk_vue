@@ -1,6 +1,5 @@
 # app/routers/items.py
 from fastapi import APIRouter, HTTPException
-from app.models import Item
 
 router = APIRouter()
 

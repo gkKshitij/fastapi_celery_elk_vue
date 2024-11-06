@@ -1,35 +1,23 @@
-from fastapi import Depends, FastAPI
+import json
+
+from fastapi import Depends, APIRouter 
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from app.db import get_session, init_db
-from app.models import Song, SongCreate, Item, Book
-##
-import json
-from pydantic import BaseModel
-from fastapi import FastAPI
-
+from app.logging_setup import setup_root_logger
+from app.db import get_session#, init_db
+from app.models import Song, SongCreate, Item
 from app.worker import celery_app
-##
-from fastapi import FastAPI, HTTPException, Depends
-from fastapi import APIRouter
-
-from fastapi import Response
-from fastapi.requests import Request
-from pydantic import BaseModel, Field
-from app import models
-from app.database import engine, session_local
-from sqlalchemy.orm import Session
-
 
 import logging
+# setup root logger
+setup_root_logger()
 # Get logger for module
 LOGGER = logging.getLogger(__name__)
 LOGGER.info("---in sample file---")
 
-# import app
-
 router = APIRouter()
+
 
 @router.get("/ping")
 async def pong():
@@ -52,8 +40,7 @@ async def add_song(song: SongCreate, session: AsyncSession = Depends(get_session
     await session.refresh(song)
     return song
 
-##
-##
+
 @router.post("/task_hello_world/")
 async def create_item(item: Item):
     # celery task name
